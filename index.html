@@ -51,7 +51,7 @@
     }
     nextPiece=()=>pieces[~~(Math.random()*pieces.length)]
     renderPiece=(color)=>piece.coordinates().forEach((b)=>dom[b.x][b.y] && (dom[b.x][b.y].style.background=color))
-    drop=()=>piece.coordinates().every((p)=>p.y+1<boardHeight) && piece.coordinates().every((p)=>dom[p.x][p.y+1].style.background!='blue') ? movePiece(0,1) : freeze()
+    drop=()=>piece.coordinates().every((p)=>p.y+1<boardHeight && dom[p.x][p.y+1].style.background!='blue') ? movePiece(0,1) : freeze()
     strafe=(d)=>piece.coordinates().every((p)=>p.x+d<boardWidth && p.x+d >=0 && p.y>=0) && piece.coordinates().every((p)=>dom[p.x+d][p.y].style.background!='blue') && movePiece(d,0)
     freeze=()=>{
       piece.coordinates().forEach((p)=>dom[p.x][p.y] && (dom[p.x][p.y].style.background='blue'))
