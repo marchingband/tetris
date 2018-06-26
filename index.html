@@ -30,8 +30,8 @@
     var level = 0
     var fallingBits = []
 
-    var b = document.getElementById('board')
-    var piece = {
+    const b = document.getElementById('board')
+    const piece = {
       reset(){
         piece.position={x:boardWidth/2,y:1}
         piece.bits=nextPiece()
@@ -94,8 +94,9 @@
         renderPiece('yellow')
     }
     turn=(d)=>{
+      const {x,y} = piece.position
       const newBits = piece.bits.map((b)=>({x:d?-(b.y):b.y,y:d?b.x:-(b.x)}))
-      if(newBits.every((p)=>p.x+piece.position.x<boardWidth && p.x+piece.position.x>=0 && p.y+piece.position.y<boardHeight && dom[p.x+piece.position.x][p.y+piece.position.y].style.background!='blue')){
+      if(newBits.every((p)=>p.x+x<boardWidth && p.x+x>=0 && p.y+y<boardHeight && dom[p.x+x][p.y+y].style.background!='blue')){
         renderPiece('red')
         piece.bits=newBits
         renderPiece('yellow')
@@ -118,15 +119,15 @@
       })
     }
     document.onkeydown=(e)=>{
-    switch (e.keyCode) {
-        case 37:strafe(-1);break
-        case 87:turn(1);break
-        case 81:turn(0);break
-        case 39:strafe(1);break
-        case 40:drop();break
+      switch (e.keyCode) {
+          case 37:strafe(-1);break
+          case 87:turn(1);break
+          case 81:turn(0);break
+          case 39:strafe(1);break
+          case 40:drop();break
+      }
     }
-};
-  piece.reset()
-  var timer = window.setInterval(drop,1000)
+    piece.reset()
+    var timer = window.setInterval(drop,1000)
   </script>
 </html>
